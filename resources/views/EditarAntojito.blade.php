@@ -1,0 +1,116 @@
+<script>
+onload = function(){ 
+  var ele = document.querySelectorAll('.validanumericos')[0];
+  ele.onkeypress = function(e) {
+     if(isNaN(this.value+String.fromCharCode(e.charCode)))
+        return false;
+  }
+  ele.onpaste = function(e){
+     e.preventDefault();
+  }
+}
+</script>
+
+<head>
+        <script type="text/javascript">
+        function add(){
+        var text = document.getElementById("text");
+        var sel = document.getElementById("sel");
+        
+        var opt = document.createElement("option");
+        
+        opt.appendChild(document.createTextNode(text.value));
+        opt.setAttribute("value", text.value);
+        
+        sel.appendChild(opt);
+        }
+		function add2(){
+        var text = document.getElementById("text");
+        var sel = document.getElementById("sel2");
+        
+        var opt = document.createElement("option");
+        
+        opt.appendChild(document.createTextNode(text.value));
+        opt.setAttribute("value", text.value);
+        
+        sel.appendChild(opt);
+        }
+        </script>
+</head>
+
+<div class="box box-primary col-xs-12">
+    <div class="box-header">
+        <h3 class="box-title">Editar un Antojito</h3>
+    </div>
+<!-- /.box-header -->
+
+
+		<!-- comienzo del formulario -->
+		<form id="AntojitoEditar" method="post" action="{{Action('AntojitoController@update', $id)}}" enctype="multipart/form-data" >
+		<input name="_method" type="hidden" value="PATCH">           		
+		{{ csrf_field() }}      			
+			<!-- seccion del nombre -->
+		<div class="box-body col-xs-12">
+			<div class="form-group col-xs-6">
+				<label>
+					<i class="fa fa-user" aria-hidden="true"></i> Nombre :</label>
+				    <select id="sel" name="Nombre" class="form-control">
+					    <option value="{{$Antojitos->Nombre}}">{{$Antojitos->Nombre}}</option>
+                        <option value="Quesadilla">Quesadilla</option>
+                        <option value="Alambre">Alambre</option>
+                        <option value="Especialidad">Especialidad</option>
+                        <option value="Taco">Taco</option>
+                        <option value="Gringa">Gringa</option>
+                        <option value="Torta">Torta</option>
+					</select>
+			</div>
+			
+			<!-- seccion de correo -->
+			<div class="form-group col-xs-6">
+				<label>
+					<i class="fa fa-envelope" aria-hidden="true"></i> Sabor:</label>
+				    <select id="sel2" name="Sabor" class="form-control">
+					    <option value="{{$Antojitos->Sabor}}">{{$Antojitos->Sabor}}</option>
+                        <option value="Natural">Natural</option>
+                        <option value="Barbacoa">Barbacoa</option>
+                        <option value="Cochinita">Cochinita</option>
+                        <option value="Tinga">Tinga</option>
+                        <option value="Champiñones">Champiñones</option>
+                        <option value="Picadillo">Picadillo</option>
+						<option value="Rajas">Rajas</option>
+                        <option value="Nopales">Nopales</option>
+                        <option value="Chicharon">Chicharon</option>
+                        <option value="Pastor">Pastor</option>
+                        <option value="Arrachera">Arrachera</option>
+                        <option value="Chorizo">Chorizo</option>
+                        <option value="Campechana">Campechana</option>
+					</select>
+			</div>
+			<!-- seccion numero de telefono -->
+			<div class="form-group col-xs-12">
+				<label>
+					<i class="fa fa-laptop" aria-hidden="true"></i>Descripcion:</label>
+				    <textarea class="form-group col-xs-12" type="text" name="Descripcion" placeholder=" " required="" value="{{$Antojitos->Descripcion}}"></textarea>
+			</div>
+			<!-- seccion de mensaje-->
+			<div class="form-group col-xs-6">
+				<label>
+					<i class="fa fa-pencil" aria-hidden="true"></i>Precio:</label>
+				    <input class="form-group col-xs-12" type="text" name="Precio" class="validanumericos" autocomplete="off" placeholder=" " required="" value="{{$Antojitos->Precio}}"/>
+			</div>
+			<div class="form-group col-xs-6"> 
+			    <label>
+					<i class="fa fa-file" aria-hidden="true"></i>Foto:</label>
+                    <input type="file" name="Foto" value="null.jpg">
+            </div>
+                
+			<div class="form-group col-xs-12">
+				<input type="submit" value="Enviar">
+			</div>
+		</div>
+			
+		</form>
+		<!-- fin del formulario -->
+</div>
+ 
+ 
